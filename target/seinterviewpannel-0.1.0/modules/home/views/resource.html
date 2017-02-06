@@ -1,0 +1,360 @@
+  <style>
+    .sponsored_light_blue{
+    background:#f5f5f5 !important;
+    }
+    </style>
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbarCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index.php"><img src="images/logo_gray-blue_80px.svg" height="36" width="175" /></a>
+        </div>
+         <div align="right"><b>Hi, {{user}}</b>
+      </div>
+        <div class="collapse navbar-collapse navbarCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="" ng-click="dashboard()">Home</a>
+                </li>
+                <li>
+                    <a href="#/login">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</nav>
+
+    <!----------------------------------------------------------------------------->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a ng-click="dashboard()" class="list-group-item">MY PROFILE</a>
+                <a href="" ng-click="panelData()" class="list-group-item">Panel Team</a>
+                <a href="#" class="list-group-item">View Panel Availability</a>
+  
+            </div>
+        </div>
+        <div class="col-md-6 dashboard">
+        <div ng-hide="dashboard0">
+                
+                
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        
+                    </div>
+                </div>
+            </div>
+            <div ng-show="dashboard1">
+                <div class="form-actions text-center padd-margin5">
+                    <button class="btn btn-primary" type="button" ng-click="panelAdd()">Add</button>
+                    <!-- <button class="btn btn-primary" type="button" ng-click="panelEdit()">Edit</button> -->
+                    <button class="btn btn-primary" type="button" ng-disabled="isDisabled" ng-click="removeSelected($index)">Remove</button>
+</div>
+                <div ng-show="panelAdd1">
+                    <h4>Add user</h4>
+                    <hr />
+                    <form name="Addform" role="form" ng-submit="add_user()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstname">First Name:</label>
+                                    <input type="text"  maxlength="20" ng-pattern="/^[a-zA-Z]*$/" name="firstname" id="firstname" class="form-control" ng-model="firstname" required />
+                               <span style="color:Red" ng-show="Addform.firstname.$error.pattern">Enter valid firstname.</span>
+                                <span style="color:Red" ng-show="Addform.firstname.$error.minlength">Shorter firstname.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name:</label>
+                                    <input type="text"  maxlength="20" ng-pattern="/^[a-zA-Z]*$/" name="lastname" autocomplete="off" id="lastname" class="form-control" ng-model="lastname" required />
+                               <span style="color:Red" ng-show="Addform.lastname.$error.pattern">Enter valid lastname.</span>
+                               <span style="color:Red" ng-show="Addform.lastname.$error.minlength">Shorter firstname.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="emailaddress">Emailaddress:</label>
+                                    <input type="text" maxlength="28" placeholder="username@epam.com" class="form-control"  ng-pattern="/^[a-z](\_?[a-z]){1,28}@epam.com$/"name="emailaddress" id="emailaddress" class="form-control" ng-model="emailaddress" required />
+                             <!--  <span style="color:Red" ng-show="Addform.emailaddress.$error.required"> Required! </span> -->
+<span style="color:Red" ng-show="Addform.emailaddress.$dirty&&Addform.emailaddress.$error.pattern">Please Enter Valid Email address</span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contactnumber">Contact Number:</label>
+                                    <input type="text" name="contactnumber" autocomplete="off" id="contactnumber" class="form-control" minlength="10" maxlength="10" ng-pattern="/^[789]\d{9}$/" ng-model="contactnumber" required />
+                                <span style="color:red" ng-show="Addform.contactnumber.$dirty && Addform.contactnumber.$invalid">
+<!-- <span ng-show="Addform.contactnumber.$error.required">Phone is required.</span> -->
+<span style="color:Red" ng-show="Addform.contactnumber.$dirty&&Addform.contactnumber.$error.pattern">Phone Number must be valid.</span>
+<span style="color:Red" ng-show="Addform.contactnumber.$error.minlength">Phone Number must be min 10 char.</span>
+</span>
+                                </div>
+                               </div>
+                               </div>
+                      
+                        <div class="row">
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                    <label for="competency1">Competency:</label>
+                                    <select name="competency1" ng-model="competency1"ng-change="getCompetency(competency1)"style="width:170px;" required>
+                                        <option selected>Select Competency</option>
+                                        <option ng-repeat="item in data1" value={{item.competencyName}}>{{item.competencyName}}</option>
+                                       <!--  <option value="java">Java</option>
+                                        <option value=".net">.Net</option>
+                                        <option value="testing">Testing</option>
+                                        <option value="others">Others</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="levelname">Level Name:</label>
+                                    <select name="levelname" ng-model="levelname" style="width:170px;" required ">
+                                    <option selected>Select Level</option>
+                                    <option ng-repeat="item in data2" value={{item.levelName}}>{{item.levelName}}</option>
+                                        <!-- <option selected="selected">Select Level</option>
+                                        <option value="l1">L1</option>
+                                        <option value="l2">L2</option>
+                                        <option value="l3">L3</option>
+                                        <option value="l4">L4</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-actions login-btn">
+                        <!-- -->
+                            <button type="submit" ng-disabled="Addform.$invalid || dataLoading" class="button">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div ng-show="panelEdit1">
+                    <h4>Edit user</h4>
+                    <hr />
+                    <form name="Editform" role="form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstname">First Name:</label>
+                                    <input type="text" maxlength="14" name="firstname" id="firstname" class="form-control" ng-model="firstname"  required />
+                               		<span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block">Password is required</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name:</label>
+                                    <input type="text" name="lastname" autocomplete="off" id="lastname" class="form-control" ng-model="lastname" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="emailaddress">Emailaddress:</label>
+                                    <input type="text" name="emailaddress" id="emailaddress" class="form-control" ng-model="emailaddress" required />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="competency">Competency:</label>
+                                    <select name="competency" style="width:170px;">
+                                        <option>Select Competency</option>
+                                        <option value="java">Java</option>
+                                        <option value=".net">.Net</option>
+                                        <option value="testing">Testing</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="levelname">Level Name:</label>
+                                    <select name="levelname" style="width:170px;">
+                                        <option>Select Level</option>
+                                        <option value="l1">L1</option>
+                                        <option value="l2">L2</option>
+                                        <option value="l3">L3</option>
+                                        <option value="l4">L4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions login-btn">
+                            <button type="submit" ng-disabled="form.$invalid || dataLoading" name="addUser"class="button">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div ng-show="panelData1">
+                    <div class="input-group padd-margin5">
+                        <input class="form-control" type="text" placeholder="Search for Panel members by Username" ng-model="query">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                    <!-- <div id="grid1" ui-grid="gridOptions" ui-grid-pagination  ui-grid-selection class="grid"></div> -->​
+                        <table id="results" class="table table-striped table-bordered table-hover table-list">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>User Id</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                      <tr ng-repeat="item in data| filter:query">
+                                    <td><input type="checkbox"  ng-model="item.selected" /></td>
+                                    <td>{{$index+1}}</td>
+                                     <td>{{item.userName}}</td>
+                                    <td>{{item.contact.emailId}}</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+           <div ng-show="dashboard2">
+                <div class="form-actions text-center padd-margin5">
+                    <button class="btn btn-primary" type="button" ng-click="competAdd()">Add Competency</button>
+                    <!-- <button class="btn btn-primary" type="button" ng-click="competEdit()">Edit Competency</button> -->
+                    <button class="btn btn-primary" type="button" ng-disabled="isDisabled" ng-click="removeSelected1($index)" >Remove Competency</button>
+                </div>
+                <div ng-show="cometeData">
+                    <div class="input-group padd-margin5">
+                        <input class="form-control" type="text" placeholder="Search for Competency" ng-model="query1">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                     
+                        <table id="results" class="table table-striped table-bordered table-hover table-list">
+                            <thead>
+                                <tr>
+                                <th>Select</th>
+                                    <th>S.No</th>
+                                    <th>Competency Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <tr ng-repeat="item in data1| filter:query">
+                                    <td><input type="checkbox" ng-click="display()" ng-model="item.selected" /></td>
+                                    <td>{{$index+1}}</td>
+                                     <td>{{item.competencyName}}</td>
+                               
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                   
+                </div>
+               
+           
+
+            </div>
+            </div>
+-----------------------------------------------------------------
+        <div class="col-md-3">
+            <div class="list-group">
+                <div class="list-group-item header-blue">PROPOSE EVENT</div>
+                <div class="list-group-item">
+                    <form name="form" ng-submit="propose_event()" role="form">
+                         
+                        <div ng-controller="DateTimePickerDemoCtrl" class="container">
+      						<div class="form-group">
+                           <label for="date">Date</label>
+                             <!--<input type="text" name="date" id="date" class="form-control" ng-model="date" required />
+                            <span ng-show="form.date.$dirty && form.date.$error.required" class="help-block">date is required</span>-->
+                            <datetimepicker hour-step="hourStep"
+                                            minute-step="minuteStep"
+                                            ng-model="date"
+                                            show-meridian="showMeridian"
+                                            date-format="{{format}}"
+                                            date-options="dateOptions"
+                                            date-disabled="disabled(date, mode)"
+                                            datepicker-append-to-body="false"
+                                            readonly-date="true"
+                                            disabled-date="false"
+                                            hidden-time="false"
+                                            hidden-date="false"
+                                            name="datetimepicker"
+                                            show-spinners="true"
+                                            readonly-time="false"
+                                            date-opened="dateOpened"
+                                            show-button-bar="false">
+                                <!-- Use date-ng-click="open($event, opened)" to override date ng-click -->
+                            </datetimepicker>
+  
+      <div class ="form-group">
+      <label for="hourStep">Hours&nbsp;step</label>
+        <select name="hourStep" style="width:200px;" ng-model="hourStep" class="form-control" id ="hourStep" ng-change="changedValueHour(hourStep)"ng-options="opt for opt in timeOptions.hourStep"></select>
+      </div>
+      <div class = "form-group">
+      <div class="row">
+        <div >Minutes&nbsp;step</div>
+          <select ng-model="minuteStep" style="width:200px;" class="form-control" ng-change="changedValueMinute(minuteStep)"ng-options="opt for opt in timeOptions.minuteStep"></select>
+      </div>
+      </div>
+      </div>
+      </div>
+                        <div class="form-group">
+                         <div class="row">
+                             <label for="Competency">Competency:</label>
+                                    <select name="competency" ng-model="competency"ng-change="getCompetency(competency)"style="width:170px;" required>
+                                        <option selected>Select Competency</option>
+                                        <option ng-repeat="item in data1" value={{item.competencyName}}>{{item.competencyName}}</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea name="Description" autocomplete="off" id="Description" class="form-control" ng-model="Description" required maxlength=200></textarea>
+                            <span ng-show="form.Description.$dirty && form.Description.$error.required" class="help-block">Description is required</span>
+                        </div>
+                        <div class="form-actions text-center">
+                            <button type="submit" class="btn btn-primary"name="propose">Submit</button>
+                            <button type="reset" class="btn btn-warning">Cancel</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+ <!--
+</div>
+<!-- /.container -->
+<script language=javascript>
+    $(".nav a").on("click", function () {
+       // alert("class");
+        $(".nav").find(".active").removeClass("active");
+        //debugger;
+        $(this).addClass("active");
+    });
+    
+</script>

@@ -1,0 +1,47 @@
+<div id="login-container">
+    <div class="text-center login-img">
+        <img src="images/logo_gray-blue_80px.svg" />
+    </div>
+    <h3 class="headerline-blue">Reset Password <!--to Access--> <!--<span class="color-blue">Assets</span>--></h3>
+    <!--<div ng-show="error" class="alert alert-danger">{{error}}</div>-->
+    <form role="form" name="myForm" novalidate ng-submit="Flogin()">
+        <div class="form-group" ng-class="{'has-success':myForm.password.$valid , 'has-error':!myForm.password.$valid }">
+            <label for="password">New Password</label>
+            <input type="password" maxlength="12" ng-keypress="validatenumber(window.event);"
+            name="password" autocomplete="off"  id="password" ng-change="analyze(password);" class="form-control" placeholder="password..." required ng-model="password" >
+            <span class="help-block" ng-show="myForm.password.$error.required">Required</span>
+        </div>
+        <div class="form-group" ng-class="{'has-success':myForm.passwordConfirmation.$valid , 'has-error':!myForm.passwordConfirmation.$valid }">
+            <label for=" passwordconfirmation">
+                Confirm Password
+            </label>
+            <input type="password" ng-keypress="validatenumber(window.event);"
+             maxlength="12" name="passwordConfirmation" autocomplete="off" id="passwordConfirmation" class="form-control" ng-change="analyzeCfm(passwordConfirmation);" required ng-model="passwordConfirmation" password-confirm match-target="password" >
+            <span class="help-block" ng-show="myForm.passwordConfirmation.$error.required">Required</span>
+        </div>
+     
+        <div class="form-actions login-btn" ng-click="disableButton()">
+        
+            <button type="submit"class="button">Reset</button>
+           <!--  <span class="help-block" ng-show="myForm.passwordConfirmation.$error.match">Passwords do not match.</span> -->
+            <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        <div>
+                   <a data-toggle="popover" title="Password Policy" data-placement="right"  data-trigger="hover" data-content="Password must have minimum 8 and maximum 12 characters. It can include:
+			Uppercase and lowercase letters.
+			Atleast one special character(!@#\$%\^&\*).
+			Atleast one digit(1<digits>=9 ).
+				">Password Policy</a>
+				<script>
+					$(document).ready(function(){
+   						 $('[data-toggle="popover"]').popover();
+   						 
+											}
+					);
+					
+</script> 
+        </div>
+    </form>
+</div>
+<!-- "!myForm.passwordConfirmation.$error.match && !myForm.password.$valid && myForm.passwordConfirmation.$valid"
+ -->

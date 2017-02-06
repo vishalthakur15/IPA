@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: seinterviewpannel
+Implementation-Version: 0.1.0
+Built-By: Vishal_Thakur
+Implementation-Vendor-Id: org.springframework
+Build-Jdk: 1.8.0_60
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: com.epam.login.Application
+

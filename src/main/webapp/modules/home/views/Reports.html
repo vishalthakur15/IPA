@@ -1,0 +1,134 @@
+  <style>
+    .sponsored_light_blue{
+    background:#f5f5f5 !important;
+    }
+    </style>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbarCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><img src="images/logo_gray-blue_80px.svg" height="36" width="175" /></a>
+        </div>
+       <div align="right"><b>Hi, {{user}}</b>
+      </div>
+        <div class="collapse navbar-collapse navbarCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="#/">Home</a>
+                </li>
+                <li>
+                    <a href="#/login">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="form-group backgrHome">
+                        
+<div ng-controller="MyController">
+<div class="form-group">
+<div class="row centered">  
+
+   <div class="col-md-3">
+    
+               <form align="center">
+            
+               
+            <div class="input-group">
+          
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" 
+                ng-model="dt" is-open="status.opened"  
+                datepicker-options="dateOptions" show-button-bar="false"  date-disabled="disabled(date, mode)"  close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+        
+            </form>
+                     </div>
+                     </div>
+                     </div>
+            <div class="row"  align="center">
+             
+            <div class="form-group">
+                                    <label for="emailid"><b>Email ID</b></label>
+                                    <input class="form-control" type="text" 
+                                    maxlength="35" placeholder="username@epam.com" ng-pattern="/^[a-z](\_?[a-z]){2,35}@epam.com$/" name="emailid"
+                                     id="emailid" class="form-control new" ng-model="emailid" autocomplete="off"
+                       uib-typeahead="item.eid for item in Arrayy| filter:$viewValue | limitTo:10" 
+                       typeahead-loading="loadingLocations" 
+                       typeahead-no-results="noResults" class="form-control">
+                                </div>
+                             
+                             
+                                 <div class="form-actions text-center padd-margin5">
+                    <button class="btn btn-primary" type="button" ng-click="Submit(dt,emailid)">Submit</button>
+                    
+                </div>
+              
+
+                  
+         
+            <div class="form-group">
+                         </div>
+                         
+            </div>
+             <div id="chart-container" align="center"></div>
+        
+           <div class="form-group">
+                         </div>
+                         
+         <div ng-show="reports" align="center">
+                    <button class="btn btn-primary" type="button" ng-click="submit1()" align="center">Monthly Report</button>
+                  </div>
+                   
+                  
+                   
+        <table ng-show=" "  align="center" id="reportsview" class="table table-bordered  table-list" style="width:200px">
+                            <!-- <thead> -->
+                   <tr>
+                   <th >Name</th>
+                   <td style="width:100px">{{e}}</td>
+                   </tr>  
+                    <tr>
+                   <th>Competency</th>
+                   <td>{{compe}}</td>
+                   </tr> 
+                    <tr>
+                   <th>Month</th>
+                   <td>{{month1}}{{year1}}</td>
+                   </tr>   
+                         
+                          <tr>
+   <th>Day</th>
+    <th>Dates</th>
+    <th>Duration</th>
+  <th>Day</th>
+    <th>Dates</th>
+    <th>Duration</th> 
+</tr>
+                              <div >
+                               <tr ng-repeat= "item3 in data123">
+                                <td> {{item3.day}}</td>
+                                  <td> {{item3.date}}</td>
+                                  <td> {{item3.value}} hrs.</td>
+                                    <td> {{item3.day1}}</td>
+                                    <td> {{item3.date1}}</td>
+                                    <td> {{item3.value1}} hrs.</td>
+                                  </td>
+                                  </tr> 
+                          </div>
+            </table>
+     
+
+
+      
+     
+     </div>
+     </div>
